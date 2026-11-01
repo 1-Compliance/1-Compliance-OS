@@ -14,6 +14,14 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json({ limit: '10mb' }));
 
+// Permissive iFrame & Embedding Headers (ensures Wix, Squarespace, and custom domains can frame the OS)
+app.use((_req, res, next) => {
+  res.removeHeader('X-Frame-Options');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Content-Security-Policy', "frame-ancestors *");
+  next();
+});
+
 // Serve static assets from public folder
 app.use('/public', express.static(path.resolve(__dirname, 'public')));
 app.use('/assets/aistudio', express.static(path.resolve(__dirname, 'public/assets/aistudio')));

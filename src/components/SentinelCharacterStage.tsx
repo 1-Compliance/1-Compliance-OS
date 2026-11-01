@@ -116,7 +116,7 @@ export const SentinelCharacterStage: React.FC<SentinelCharacterStageProps> = ({
     const chosen = availableVoices.find((v) => v.name === voiceName);
     if (chosen) {
       setCustomSentinelVoice(sentinel.id, chosen.voiceURI || chosen.name);
-      speakSentinel(sentinel.id, `Voice updated! ${sentinel.name} speaking in this accent.`);
+      speakSentinel(sentinel.id, `Voice updated! ${sentinel.name} audio profile calibrated.`);
     }
   };
 
@@ -171,21 +171,17 @@ export const SentinelCharacterStage: React.FC<SentinelCharacterStageProps> = ({
                 {sentinel.fullName}
               </h3>
 
-              {/* Accent & Voice Profile Badge */}
+              {/* Voice & Role Profile Badge */}
               <span
                 className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-black border shadow-xs ${
-                  voiceProfile.accent === 'british'
-                    ? isLight
-                      ? 'bg-rose-50 text-rose-800 border-rose-300'
-                      : 'bg-rose-950/70 text-rose-300 border-rose-700/80'
-                    : isLight
+                  isLight
                     ? 'bg-blue-50 text-blue-800 border-blue-300'
                     : 'bg-blue-950/70 text-blue-300 border-blue-700/80'
                 }`}
-                title={`Accent: ${voiceProfile.accentLabel}`}
+                title={`Unit: ${voiceProfile.roleBadge}`}
               >
-                <span>{voiceProfile.accentFlag}</span>
-                <span>{voiceProfile.accentLabel}</span>
+                <span>🛡️</span>
+                <span>{voiceProfile.roleBadge}</span>
               </span>
             </div>
             <p className={`text-xs font-semibold ${isLight ? 'text-indigo-900' : 'text-cyan-300'}`}>
@@ -208,7 +204,7 @@ export const SentinelCharacterStage: React.FC<SentinelCharacterStageProps> = ({
             }`}
             title="Hear Sentinel Voice aloud"
           >
-            <span>{isSpeaking ? '⏹ Stop Voice' : `🔊 Speak (${voiceProfile.accentFlag} ${voiceProfile.accent === 'british' ? 'British' : 'American'})`}</span>
+            <span>{isSpeaking ? '⏹ Stop Audio' : '🔊 Play Audio Briefing'}</span>
           </button>
 
           <button
@@ -236,7 +232,7 @@ export const SentinelCharacterStage: React.FC<SentinelCharacterStageProps> = ({
                 ? 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
                 : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
             }`}
-            title="Configure System Voice & Accents"
+            title="Configure System Voice & Audio"
           >
             ⚙️ Voices
           </button>
@@ -254,8 +250,8 @@ export const SentinelCharacterStage: React.FC<SentinelCharacterStageProps> = ({
         >
           <div className="flex items-center justify-between font-bold">
             <span className="flex items-center gap-1.5 text-indigo-900 font-black">
-              <span>{voiceProfile.accentFlag}</span>
-              <span>Assigned Accent: {voiceProfile.accentLabel}</span>
+              <span>🔊</span>
+              <span>Audio Unit: {voiceProfile.roleBadge}</span>
             </span>
             <span className="text-[11px] font-mono text-slate-500">
               Pitch: {voiceProfile.pitch}x · Rate: {voiceProfile.rate}x
@@ -271,17 +267,17 @@ export const SentinelCharacterStage: React.FC<SentinelCharacterStageProps> = ({
                 isLight ? 'bg-slate-50 border-slate-300 text-slate-900' : 'bg-slate-800 border-slate-600 text-white'
               }`}
             >
-              {availableVoices.length === 0 && <option value="">Default Browser Voice ({voiceProfile.accent})</option>}
+              {availableVoices.length === 0 && <option value="">Default Browser Voice</option>}
               {availableVoices.map((v) => (
                 <option key={v.voiceURI || v.name} value={v.name}>
-                  {v.name} ({v.lang}) {v.lang.toLowerCase().includes('gb') ? '🇬🇧 UK' : v.lang.toLowerCase().includes('us') ? '🇺🇸 US' : ''}
+                  {v.name} ({v.lang})
                 </option>
               ))}
             </select>
 
             <button
               type="button"
-              onClick={() => handleSpeak(`Testing ${voiceProfile.accent} voice for ${sentinel.name}. System checks nominal.`)}
+              onClick={() => handleSpeak(`Audio profile calibrated for ${sentinel.name}. Systems nominal.`)}
               className="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-700 active:scale-95 shrink-0"
             >
               ▶ Audition

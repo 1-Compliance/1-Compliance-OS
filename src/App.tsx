@@ -49,6 +49,11 @@ import { GamifiedTrainingArcade } from './components/GamifiedTrainingArcade';
 import { BeginnerOnboardingModal } from './components/BeginnerOnboardingModal';
 import { SentinelId } from './types/sentinels';
 import { FloatingSentinelCompanion } from './components/FloatingSentinelCompanion';
+import { ShowcasePaywallModal } from './components/ShowcasePaywallModal';
+import { IndustryConformanceModal } from './components/IndustryConformanceModal';
+import { EmployeeHandbookSynthesizer } from './components/EmployeeHandbookSynthesizer';
+import { EmploymentAndLocalLawsView } from './components/EmploymentAndLocalLawsView';
+import { EverydayEmployeePortalView } from './components/EverydayEmployeePortalView';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
@@ -140,17 +145,81 @@ export default function App() {
 
   const [theme, setTheme] = useState<'midnight' | 'luminous'>('luminous');
 
+  // Platform Operational Mode: Showcase (Public Visitor / Read-Only Demo) vs Subscribed (Active Enterprise)
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [paywallModalOpen, setPaywallModalOpen] = useState<boolean>(false);
+  const [gatedFeatureName, setGatedFeatureName] = useState<string>('Auditor Package Export');
+  const [isConformanceModalOpen, setIsConformanceModalOpen] = useState<boolean>(false);
+  const [conformanceToast, setConformanceToast] = useState<string | null>(null);
+
   const [branding, setBranding] = useState<CompanyBrandingConfig>({
-    companyName: 'Acme Corporation',
+    companyName: '1-Compliance',
     portalSubtitle: 'Enterprise Compliance Operating System',
-    primaryColor: '#1d4ed8',
-    accentColor: '#06b6d4',
+    primaryColor: '#06b6d4',
+    accentColor: '#3b82f6',
     themePreset: 'corporate_blue',
-    welcomeMessage: "Welcome to Acme Corp's Internal Compliance Operating System",
-    allowedEmailDomains: ['acmecorp.com'],
-    isWhiteLabelActive: true,
-    corporateDomain: 'compliance.acmecorp.com',
+    welcomeMessage: 'Welcome to 1-Compliance Operating System',
+    allowedEmailDomains: ['1-compliance.com'],
+    isWhiteLabelActive: false,
+    corporateDomain: 'app.1-compliance.com',
   });
+
+  const handleTriggerPaywall = (feature: string) => {
+    setGatedFeatureName(feature);
+    setPaywallModalOpen(true);
+  };
+
+  const handleOpenExportBinder = () => {
+    if (!isSubscribed) {
+      handleTriggerPaywall('Auditor-Ready ZIP Binder & Attestation Evidence Package');
+    } else {
+      setIsExportOpen(true);
+    }
+  };
+
+  const handleApplyIndustryConformance = (
+    newIndustry: IndustryType,
+    newScale: CompanyScale,
+    primaryGoal: string,
+    customReqs: string[]
+  ) => {
+    setIndustry(newIndustry);
+    setScale(newScale);
+
+    // Auto-select the anchor framework based on chosen industry
+    let anchorFramework = 'soc2';
+    let industryTagline = 'Cloud Software & B2B SaaS Compliance';
+    if (newIndustry === 'healthcare') {
+      anchorFramework = 'hipaa';
+      industryTagline = 'Healthcare & HIPAA / PHI Compliance Fortress';
+    } else if (newIndustry === 'fintech_crypto') {
+      anchorFramework = 'pcidss';
+      industryTagline = 'FinTech, Banking & PCI DSS v4 Compliance OS';
+    } else if (newIndustry === 'manufacturing') {
+      anchorFramework = 'iso27001';
+      industryTagline = 'Factory Operations & ISO 27001 Safety Management';
+    } else if (newIndustry === 'defense_gov') {
+      anchorFramework = 'cmmc';
+      industryTagline = 'CMMC Level 2 & Defense Contractor DoD Fortress';
+    } else if (newIndustry === 'ecommerce') {
+      anchorFramework = 'pcidss';
+      industryTagline = 'E-Commerce & PCI DSS / Privacy Protection';
+    }
+
+    setSelectedFrameworkId(anchorFramework);
+
+    // Update custom branding subtitle & welcome text dynamically
+    setBranding((prev) => ({
+      ...prev,
+      portalSubtitle: `${prev.companyName} ${industryTagline}`,
+      welcomeMessage: `Welcome to ${prev.companyName}'s ${industryTagline}`,
+    }));
+
+    setConformanceToast(
+      `✓ 1-Compliance OS successfully conformed to ${newIndustry.toUpperCase()}! ${customReqs.length} compliance modules and ${anchorFramework.toUpperCase()} controls re-tuned.`
+    );
+    setTimeout(() => setConformanceToast(null), 5000);
+  };
 
   const handleSelectFramework = (id: string) => {
     setSelectedFrameworkId(id);
@@ -190,14 +259,140 @@ export default function App() {
       <TopNavigation
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        onOpenExport={() => setIsExportOpen(true)}
+        onOpenExport={handleOpenExportBinder}
         onOpenAdvisor={() => setIsAdvisorOpen(true)}
         onOpenSentinelHub={handleOpenSentinelHub}
         onOpenOnboarding={() => setIsOnboardingOpen(true)}
         theme={theme}
         onToggleTheme={() => setTheme(theme === 'midnight' ? 'luminous' : 'midnight')}
         branding={branding}
+        isSubscribed={isSubscribed}
+        onToggleSubscribed={() => setIsSubscribed(!isSubscribed)}
+        onOpenConformance={() => setIsConformanceModalOpen(true)}
+        currentIndustry={industry}
+        onSelectRole={(role) => {
+          if (role === 'everyday_employee') {
+            setActiveTab('employee_portal');
+          } else if (role === 'legal_local') {
+            setActiveTab('locallaws');
+          } else {
+            setActiveTab('departments');
+          }
+        }}
       />
+
+      {/* Showcase Demo Mode vs Subscribed Enterprise Banner */}
+      <div className="relative z-30 px-4 sm:px-6 lg:px-8 pt-3">
+        <div className="max-w-[1440px] mx-auto">
+          {!isSubscribed ? (
+            /* Showcase Mode Banner for Public Visitors */
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-cyan-950/90 via-slate-900 to-indigo-950/90 border-2 border-cyan-500/60 shadow-lg flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-3 text-slate-200">
+                <span className="text-xl">👁️</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-black text-cyan-300 font-mono tracking-wider uppercase">
+                      Showcase Interactive Demo Mode
+                    </span>
+                    <span className="px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 font-mono text-[10px] font-bold border border-amber-400/40">
+                      Read-Only Example
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    Exploring sample data on <strong>www.1-compliance.com</strong>. Visitors have visual access to preview all Sentinels & frameworks. Subscribe ($149 Solo, $299 Team, $999 Ent) to activate live autonomous scanning for your company.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setIsConformanceModalOpen(true)}
+                  className="px-3 py-1.5 rounded-xl bg-indigo-950/80 hover:bg-indigo-900 text-cyan-300 font-bold border border-indigo-500/60 transition-colors shadow-xs"
+                >
+                  🏢 Preview Industry Conformance
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('subscriptions')}
+                  className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-slate-950 font-black shadow-md hover:opacity-95 transition-all"
+                >
+                  💳 Unlock Full OS ($149+)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsSubscribed(true)}
+                  className="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-[11px] border border-slate-700 transition-colors"
+                  title="Simulate subscribed enterprise view (for founder / testing)"
+                >
+                  🔓 Founder Unlock
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Subscribed Enterprise Mode Banner */
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 border-2 border-emerald-500/60 shadow-lg flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-3 text-slate-200">
+                <span className="text-xl">🏢</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-black text-emerald-300 font-mono tracking-wider uppercase">
+                      Subscribed Enterprise Workspace Active
+                    </span>
+                    <span className="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-400/40">
+                      Conformed to: {industry.toUpperCase()}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    Operating system conformed for <strong>{branding.companyName}</strong>. All 5 Autonomous Sentinels standing guard.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setIsConformanceModalOpen(true)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 text-indigo-300 font-bold border border-indigo-700/60 transition-colors shadow-xs"
+                >
+                  ⚙️ Re-Conform Industry
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('subscriptions')}
+                  className="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-black shadow-xs hover:bg-emerald-400 transition-colors"
+                >
+                  💳 Manage Plan
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsSubscribed(false)}
+                  className="px-2 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 font-mono text-[11px] border border-slate-700"
+                  title="Switch back to visitor showcase preview"
+                >
+                  👁️ Demo View
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Toast Notification when Industry Conformance Changes */}
+          {conformanceToast && (
+            <div className="mt-2 p-3 rounded-xl bg-indigo-950 text-indigo-100 border border-indigo-400 text-xs font-mono flex items-center justify-between shadow-lg animate-in fade-in duration-200">
+              <div className="flex items-center gap-2">
+                <span>✨</span>
+                <span>{conformanceToast}</span>
+              </div>
+              <button
+                onClick={() => setConformanceToast(null)}
+                className="text-indigo-300 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Main Workspace Viewport (Desktop 1440px Baseline) */}
       <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
@@ -292,6 +487,30 @@ export default function App() {
 
         {activeTab === 'departments' && (
           <DepartmentHubView
+            onOpenSentinelHub={handleOpenSentinelHub}
+            onNavigateTab={(tab) => setActiveTab(tab)}
+          />
+        )}
+
+        {activeTab === 'handbook' && (
+          <EmployeeHandbookSynthesizer
+            branding={branding}
+            onOpenSentinelHub={handleOpenSentinelHub}
+            onNavigateTab={(tab) => setActiveTab(tab)}
+          />
+        )}
+
+        {activeTab === 'locallaws' && (
+          <EmploymentAndLocalLawsView
+            branding={branding}
+            onOpenSentinelHub={handleOpenSentinelHub}
+            onNavigateTab={(tab) => setActiveTab(tab)}
+          />
+        )}
+
+        {activeTab === 'employee_portal' && (
+          <EverydayEmployeePortalView
+            branding={branding}
             onOpenSentinelHub={handleOpenSentinelHub}
             onNavigateTab={(tab) => setActiveTab(tab)}
           />
@@ -401,6 +620,33 @@ export default function App() {
       <FloatingSentinelCompanion
         onOpenSentinelHub={handleOpenSentinelHub}
         currentView={activeTab}
+      />
+
+      {/* Showcase Demo Mode Gate / Paywall Modal */}
+      <ShowcasePaywallModal
+        isOpen={paywallModalOpen}
+        onClose={() => setPaywallModalOpen(false)}
+        featureName={gatedFeatureName}
+        onNavigateToSubscriptions={() => {
+          setActiveTab('subscriptions');
+          setPaywallModalOpen(false);
+        }}
+        onUnlockDemo={() => setIsSubscribed(true)}
+      />
+
+      {/* Dynamic Industry Conformance Engine Modal */}
+      <IndustryConformanceModal
+        isOpen={isConformanceModalOpen}
+        onClose={() => setIsConformanceModalOpen(false)}
+        currentIndustry={industry}
+        currentScale={scale}
+        companyName={branding.companyName}
+        onApplyConformance={handleApplyIndustryConformance}
+        isSubscribed={isSubscribed}
+        onOpenSubscriptions={() => {
+          setActiveTab('subscriptions');
+          setIsConformanceModalOpen(false);
+        }}
       />
     </div>
   );

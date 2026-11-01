@@ -261,16 +261,16 @@ export const SentinelCommandHub: React.FC<SentinelCommandHubProps> = ({
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black bg-cyan-100 text-cyan-900 border border-cyan-300">
                       {currentSentinel.badge}
                     </span>
-                    {/* Distinct Accent Indicator */}
+                    {/* Role Badge Indicator */}
                     <span
                       className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold border shadow-xs ${
-                        voiceProfile.accent === 'british'
-                          ? 'bg-rose-100 text-rose-900 border-rose-300'
-                          : 'bg-blue-100 text-blue-900 border-blue-300'
+                        isLight
+                          ? 'bg-blue-100 text-blue-900 border-blue-300'
+                          : 'bg-blue-950/70 text-blue-300 border-blue-700/80'
                       }`}
                     >
-                      <span>{voiceProfile.accentFlag}</span>
-                      <span>{voiceProfile.accent === 'british' ? 'British Accent' : 'American Accent'}</span>
+                      <span>🛡️</span>
+                      <span>{voiceProfile.roleBadge}</span>
                     </span>
                   </div>
                   <div className="text-xs text-indigo-700 font-semibold">
@@ -284,7 +284,7 @@ export const SentinelCommandHub: React.FC<SentinelCommandHubProps> = ({
                 {/* Speaking waveform animation */}
                 {isSpeakingAudio && (
                   <div className="hidden sm:flex items-center gap-1 px-3 py-1 bg-purple-100 rounded-xl text-purple-900 border border-purple-300 text-xs font-mono font-black animate-pulse">
-                    <span>{voiceProfile.accentFlag} Speaking</span>
+                    <span>🔊 Audio Active</span>
                     <span className="inline-block w-1 h-3 bg-purple-600 animate-bounce" />
                     <span className="inline-block w-1 h-4 bg-purple-600 animate-bounce delay-75" />
                     <span className="inline-block w-1 h-2 bg-purple-600 animate-bounce delay-150" />
@@ -360,7 +360,6 @@ export const SentinelCommandHub: React.FC<SentinelCommandHubProps> = ({
                       className="w-5 h-5 object-contain"
                     />
                     <span>{sentinel.name}</span>
-                    <span className="text-[11px]">{profile?.accentFlag}</span>
                     <span className={`text-[10px] font-mono px-1 rounded ${isSelected ? 'bg-indigo-800 text-white' : 'bg-slate-100 text-slate-600'}`}>
                       {sentinel.badge}
                     </span>
@@ -417,7 +416,7 @@ export const SentinelCommandHub: React.FC<SentinelCommandHubProps> = ({
                               <div className="flex items-center gap-1.5">
                                 <span>{currentSentinel.name}</span>
                                 <span className="text-[11px] font-normal px-2 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700">
-                                  {voiceProfile.accentFlag} {voiceProfile.accent === 'british' ? 'British' : 'American'}
+                                  {voiceProfile.roleBadge}
                                 </span>
                               </div>
                               <button
@@ -474,7 +473,7 @@ export const SentinelCommandHub: React.FC<SentinelCommandHubProps> = ({
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') handleSendMessage();
                     }}
-                    placeholder={`Speak with ${currentSentinel.name} (${voiceProfile.accent === 'british' ? 'British' : 'American'})...`}
+                    placeholder={`Consult with ${currentSentinel.name}...`}
                     className="flex-1 px-4 py-2.5 text-xs sm:text-sm rounded-2xl border-2 border-slate-300 focus:outline-none focus:border-indigo-600 font-semibold bg-slate-50 text-slate-950 placeholder-slate-400"
                   />
                   <button

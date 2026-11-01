@@ -306,3 +306,30 @@ export interface CompanyBrandingConfig {
   corporateDomain: string;
 }
 
+export type JurisdictionRegion =
+  | 'all'
+  | 'us_federal'
+  | 'us_ca'
+  | 'us_ny'
+  | 'us_il'
+  | 'us_tx'
+  | 'us_other_states'
+  | 'eu'
+  | 'uk'
+  | 'canada'
+  | 'australia'
+  | 'apac'
+  | 'global';
+
+export interface JurisdictionProfile {
+  id: string;
+  code: JurisdictionRegion;
+  name: string;
+  flag: string;
+  type: 'federal' | 'state' | 'country' | 'economic_bloc';
+  privacyStandard: string;
+  employmentDoctrine: string;
+  mandatoryTrainings: string[];
+  keyAuthorities: string[];
+}
+

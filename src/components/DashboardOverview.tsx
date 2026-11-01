@@ -70,6 +70,105 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* ========================================================================= */}
+      {/* 0. DEPARTMENT & ROLE WORKSPACE SEGMENTATION SELECTOR                      */}
+      {/* ========================================================================= */}
+      <section className="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border-2 border-indigo-400/40 shadow-xl text-white">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3.5">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-amber-400 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <span>🏢</span>
+                <span>Select Workspace by Department / Role</span>
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono border border-emerald-400/30 font-bold">
+                Role-Based Focus
+              </span>
+            </div>
+            <p className="text-xs text-slate-300 mt-1">
+              Filter the 1-Compliance OS for your specific daily role so you only see what matters to you:
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+          {/* IT & DevOps */}
+          <button
+            onClick={() => onNavigateTab('departments')}
+            className="p-3 rounded-2xl bg-slate-950/70 hover:bg-slate-800/90 border border-cyan-500/30 hover:border-cyan-400 transition-all text-left flex flex-col justify-between group cursor-pointer"
+          >
+            <div className="text-xl mb-1 group-hover:scale-110 transition-transform">💻</div>
+            <div>
+              <div className="font-black text-xs text-white group-hover:text-cyan-300">IT & DevOps</div>
+              <div className="text-[10px] text-slate-400">Fleet laptops, BitLocker, CI/CD</div>
+            </div>
+          </button>
+
+          {/* HR & People */}
+          <button
+            onClick={() => onNavigateTab('departments')}
+            className="p-3 rounded-2xl bg-slate-950/70 hover:bg-slate-800/90 border border-purple-500/30 hover:border-purple-400 transition-all text-left flex flex-col justify-between group cursor-pointer"
+          >
+            <div className="text-xl mb-1 group-hover:scale-110 transition-transform">👥</div>
+            <div>
+              <div className="font-black text-xs text-white group-hover:text-purple-300">HR & People</div>
+              <div className="text-[10px] text-slate-400">Harassment training, I-9, EEO</div>
+            </div>
+          </button>
+
+          {/* Everyday Employee */}
+          <button
+            onClick={() => onNavigateTab('employee_portal')}
+            className="p-3 rounded-2xl bg-emerald-950/80 hover:bg-emerald-900/90 border-2 border-emerald-400 shadow-md transition-all text-left flex flex-col justify-between group cursor-pointer ring-2 ring-emerald-500/20"
+          >
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xl group-hover:scale-110 transition-transform">💼</span>
+              <span className="px-1.5 py-0.2 rounded-full bg-emerald-400 text-slate-950 font-mono text-[9px] font-black">Focused</span>
+            </div>
+            <div>
+              <div className="font-black text-xs text-emerald-300">Everyday Employee</div>
+              <div className="text-[10px] text-slate-300">Quests, sign-offs, rights</div>
+            </div>
+          </button>
+
+          {/* Legal, Multi-Jurisdiction & BOI */}
+          <button
+            onClick={() => onNavigateTab('locallaws')}
+            className="p-3 rounded-2xl bg-slate-950/70 hover:bg-slate-800/90 border border-amber-500/30 hover:border-amber-400 transition-all text-left flex flex-col justify-between group cursor-pointer"
+          >
+            <div className="text-xl mb-1 group-hover:scale-110 transition-transform">⚖️</div>
+            <div>
+              <div className="font-black text-xs text-white group-hover:text-amber-300">Multi-State & Global</div>
+              <div className="text-[10px] text-slate-400">US, CA, NY, EU, UK, BOI</div>
+            </div>
+          </button>
+
+          {/* Employee Handbook */}
+          <button
+            onClick={() => onNavigateTab('handbook')}
+            className="p-3 rounded-2xl bg-slate-950/70 hover:bg-slate-800/90 border border-indigo-500/30 hover:border-indigo-400 transition-all text-left flex flex-col justify-between group cursor-pointer"
+          >
+            <div className="text-xl mb-1 group-hover:scale-110 transition-transform">📖</div>
+            <div>
+              <div className="font-black text-xs text-white group-hover:text-indigo-300">Employee Manual</div>
+              <div className="text-[10px] text-slate-400">Synthesizer & signatures</div>
+            </div>
+          </button>
+
+          {/* Executive & Board */}
+          <button
+            onClick={() => onNavigateTab('enterprise')}
+            className="p-3 rounded-2xl bg-slate-950/70 hover:bg-slate-800/90 border border-slate-600 hover:border-slate-400 transition-all text-left flex flex-col justify-between group cursor-pointer"
+          >
+            <div className="text-xl mb-1 group-hover:scale-110 transition-transform">📊</div>
+            <div>
+              <div className="font-black text-xs text-white group-hover:text-cyan-300">Executive & Board</div>
+              <div className="text-[10px] text-slate-400">Posture score & registers</div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
       {/* 1. SENTINEL COMMAND STAGE (VOICE ENABLED & DISTINCT ACCENTS)               */}
       {/* ========================================================================= */}
       <section className="space-y-3">
@@ -102,7 +201,6 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                 >
                   <img src={s.image} alt={s.name} className="w-4 h-4 object-contain" />
                   <span>{s.name}</span>
-                  <span className="text-[11px]">{profile?.accentFlag}</span>
                 </button>
               );
             })}
@@ -386,16 +484,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                     <span className="font-black text-slate-950 text-base">
                       {sentinel.name}
                     </span>
-                    {/* Distinct Accent Flag Badge */}
+                    {/* Role Unit Badge */}
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${
-                        profile?.accent === 'british'
-                          ? 'bg-rose-50 text-rose-900 border-rose-300'
-                          : 'bg-blue-50 text-blue-900 border-blue-300'
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
+                        themeColors.badge
                       }`}
                     >
-                      <span>{profile?.accentFlag}</span>
-                      <span>{profile?.accent === 'british' ? 'British' : 'American'}</span>
+                      <span>🛡️</span>
+                      <span>{profile?.roleBadge || 'Active Unit'}</span>
                     </span>
                   </div>
 
@@ -405,7 +501,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                  {/* Speaker button to trigger speech with distinct accent */}
+                  {/* Speaker button to trigger speech */}
                   <button
                     type="button"
                     onClick={() => handleSpeakSentinel(sentinel.id, sentinel.greeting)}
@@ -414,9 +510,9 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
                         ? 'bg-purple-600 text-white animate-pulse'
                         : 'bg-purple-50 text-purple-900 hover:bg-purple-100 border border-purple-200 active:scale-95'
                     }`}
-                    title={`Hear ${sentinel.name} speak in ${profile?.accent === 'british' ? 'British' : 'American'} accent`}
+                    title={`Hear audio briefing from ${sentinel.name}`}
                   >
-                    <span>{isSpeakingThis ? '⏹ Stop' : '🔊 Hear Voice'}</span>
+                    <span>{isSpeakingThis ? '⏹ Stop' : '🔊 Hear Audio'}</span>
                   </button>
 
                   <button

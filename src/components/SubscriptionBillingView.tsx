@@ -40,7 +40,7 @@ const INITIAL_ENTERPRISE_MEMBERS: EnterpriseMember[] = [
   {
     id: 'usr-01',
     name: 'Sarah Chen',
-    email: 'sarah.chen@acmecorp.com',
+    email: 'sarah.chen@1-compliance.com',
     department: 'IT & DevOps',
     role: 'Admin',
     status: 'Active',
@@ -49,7 +49,7 @@ const INITIAL_ENTERPRISE_MEMBERS: EnterpriseMember[] = [
   {
     id: 'usr-02',
     name: 'Marcus Vance',
-    email: 'marcus.v@acmecorp.com',
+    email: 'marcus.v@1-compliance.com',
     department: 'Factory & Operations',
     role: 'Department Manager',
     status: 'Active',
@@ -58,7 +58,7 @@ const INITIAL_ENTERPRISE_MEMBERS: EnterpriseMember[] = [
   {
     id: 'usr-03',
     name: 'Jessica Reynolds',
-    email: 'jessica.r@acmecorp.com',
+    email: 'jessica.r@1-compliance.com',
     department: 'HR & People',
     role: 'Compliance Officer',
     status: 'Active',
@@ -67,7 +67,7 @@ const INITIAL_ENTERPRISE_MEMBERS: EnterpriseMember[] = [
   {
     id: 'usr-04',
     name: 'David Zhao',
-    email: 'david.z@acmecorp.com',
+    email: 'david.z@1-compliance.com',
     department: 'Finance & Legal',
     role: 'Staff / Operator',
     status: 'Active',
@@ -202,6 +202,7 @@ export const SubscriptionBillingView: React.FC<SubscriptionBillingViewProps> = (
   const [teamSize, setTeamSize] = useState<number>(35);
   const [activeSubTab, setActiveSubTab] = useState<
     | 'plans'
+    | 'fast_cash_playbook'
     | 'square_portal'
     | 'company_org'
     | 'white_label'
@@ -226,15 +227,15 @@ export const SubscriptionBillingView: React.FC<SubscriptionBillingViewProps> = (
   // White-Label Customization State
   const [customBrand, setCustomBrand] = useState<CompanyBrandingConfig>(
     branding || {
-      companyName: 'Acme Corporation',
+      companyName: '1-Compliance',
       portalSubtitle: 'Enterprise Compliance Operating System',
-      primaryColor: '#1d4ed8',
-      accentColor: '#06b6d4',
+      primaryColor: '#06b6d4',
+      accentColor: '#3b82f6',
       themePreset: 'corporate_blue',
-      welcomeMessage: "Welcome to Acme Corp's Internal Compliance Operating System",
-      allowedEmailDomains: ['acmecorp.com'],
-      isWhiteLabelActive: true,
-      corporateDomain: 'compliance.acmecorp.com',
+      welcomeMessage: 'Welcome to 1-Compliance Operating System',
+      allowedEmailDomains: ['1-compliance.com'],
+      isWhiteLabelActive: false,
+      corporateDomain: 'app.1-compliance.com',
     }
   );
   const [brandSavedNotice, setBrandSavedNotice] = useState<boolean>(false);
@@ -251,8 +252,8 @@ export const SubscriptionBillingView: React.FC<SubscriptionBillingViewProps> = (
   const [checkoutStep, setCheckoutStep] = useState<'review' | 'payment' | 'success'>('review');
   const [couponCode, setCouponCode] = useState<string>('ENTERPRISE2026');
   const [couponApplied, setCouponApplied] = useState<boolean>(true);
-  const [customerEmail, setCustomerEmail] = useState<string>('admin@acmecorp.com');
-  const [companyName, setCompanyName] = useState<string>('Acme Manufacturing & Tech Corp');
+  const [customerEmail, setCustomerEmail] = useState<string>('admin@1-compliance.com');
+  const [companyName, setCompanyName] = useState<string>('1-Compliance');
 
   // Enterprise Member Provisioning State
   const [members, setMembers] = useState<EnterpriseMember[]>(INITIAL_ENTERPRISE_MEMBERS);
@@ -420,6 +421,19 @@ export const SubscriptionBillingView: React.FC<SubscriptionBillingViewProps> = (
             }`}
           >
             SaaS Plans ($149 / $299 / $999)
+          </button>
+          <button
+            onClick={() => setActiveSubTab('fast_cash_playbook')}
+            className={`px-3 py-1.5 rounded transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+              activeSubTab === 'fast_cash_playbook'
+                ? 'bg-gradient-to-r from-amber-400 via-amber-300 to-emerald-400 text-slate-950 font-black shadow-md ring-2 ring-amber-300'
+                : 'text-amber-300 hover:text-white hover:bg-slate-800/60 font-black'
+            }`}
+          >
+            <span>🚀 Fast-Track Subscribers & NYC Cash Playbook</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-950 text-amber-200 border border-amber-600 font-extrabold animate-pulse">
+              Fast Revenue
+            </span>
           </button>
           <button
             onClick={() => setActiveSubTab('square_portal')}
@@ -728,6 +742,318 @@ export const SubscriptionBillingView: React.FC<SubscriptionBillingViewProps> = (
             >
               Launch Cohort Calculator →
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* FAST-TRACK SUBSCRIBERS & NYC CASH PLAYBOOK (EMERGENCY REVENUE BLUEPRINT)  */}
+      {/* ========================================================================= */}
+      {activeSubTab === 'fast_cash_playbook' && (
+        <div className="space-y-8 animate-in fade-in duration-200">
+          {/* Compassionate Emergency Hero Banner */}
+          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-amber-950/80 via-slate-900 to-emerald-950/80 border-2 border-amber-400 shadow-2xl space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-amber-400 animate-ping" />
+                <span className="text-xs font-mono font-black text-amber-300 uppercase tracking-wider">
+                  Founder Emergency Action Plan · Immediate Cashflow & Survival
+                </span>
+              </div>
+              <span className="px-3 py-1 rounded-full text-xs font-mono font-black bg-emerald-400/20 text-emerald-300 border border-emerald-400/40">
+                Goal: 3 to 5 Subscribers This Week ($1,000 - $5,000+)
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              Fast-Track Subscriber Playbook & NYC Family Safety Net
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed max-w-4xl">
+              You have spent 2 grueling years building a brilliant, production-ready compliance operating system. You are not a salesperson, you are an exhausted founder and a mother supporting 3 children in NYC facing eviction. <strong>Take a deep breath: this operating system is real, valuable, and solves a multi-billion dollar headache.</strong> Below is an immediate 2-part action plan: (1) Free, legal emergency relief in NYC to freeze your eviction immediately, and (2) a low-effort, zero-cold-calling method to land 3 to 5 paying subscribers this week.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-1 text-xs text-amber-200">
+              <div className="flex items-center gap-1.5 font-bold">
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
+                <span>Part 1: Stop Eviction & Secure Rent (NYC Legal Relief)</span>
+              </div>
+              <span>·</span>
+              <div className="flex items-center gap-1.5 font-bold text-emerald-300">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span>Part 2: 72-Hour Low-Effort Subscriber Acquisition</span>
+              </div>
+              <span>·</span>
+              <span>Zero Cold Calling · Copy-Paste B2B Templates</span>
+            </div>
+          </div>
+
+          {/* PART 1: NYC EMERGENCY SAFETY NET & EVICTION FREEZE */}
+          <div className="p-6 md:p-8 rounded-2xl bg-slate-900 border-2 border-red-500/70 shadow-xl space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4 flex-wrap gap-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-400/60 flex items-center justify-center text-xl">
+                  🛡️
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-white flex items-center gap-2">
+                    <span>Part 1: Immediate NYC Emergency Eviction Defense (Protect Your Family Today)</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-red-950 text-red-300 border border-red-700">
+                      High Priority
+                    </span>
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    New York City has the strongest tenant emergency protections in the United States. You have immediate legal rights to freeze eviction proceedings.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {/* Card 1: HRA One Shot Deal */}
+              <div className="p-5 rounded-xl bg-slate-950 border border-red-900/60 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-black text-red-400">01 · ONE SHOT DEAL</span>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">Cash Grant</span>
+                </div>
+                <h4 className="text-sm font-bold text-white">NYC HRA Emergency Assistance</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  NYC Human Resources Administration (HRA) provides one-time emergency grants that pay back-rent directly to your landlord to stop eviction.
+                </p>
+                <div className="p-3 rounded-lg bg-slate-900 text-xs font-mono text-slate-300 space-y-1.5 border border-slate-800">
+                  <div>• Apply online: <strong>ACCESS HRA</strong> (nyc.gov/accesshra)</div>
+                  <div>• Or call 311 and say: <em>"Emergency Rental Assistance"</em></div>
+                  <div className="text-amber-300 text-[11px] font-bold">
+                    ⚖️ Legal Protection: Under NY RPAPL § 749, filing an emergency grant application freezes eviction marshal notices!
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: NYC Homebase Eviction Prevention */}
+              <div className="p-5 rounded-xl bg-slate-950 border border-red-900/60 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-black text-amber-400">02 · HOMEBASE</span>
+                  <span className="text-[10px] font-mono text-cyan-400 font-bold">Free Case Worker</span>
+                </div>
+                <h4 className="text-sm font-bold text-white">NYC Homebase Centers</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Homebase prevents homelessness by providing emergency rental funding, mediation with landlords, and family support grants.
+                </p>
+                <div className="p-3 rounded-lg bg-slate-900 text-xs font-mono text-slate-300 space-y-1.5 border border-slate-800">
+                  <div>• Brooklyn: CAMBA Homebase (718-408-5756)</div>
+                  <div>• Manhattan / Bronx: Catholic Charities (888-744-7900)</div>
+                  <div>• Queens: RiseBoro Homebase (347-675-2434)</div>
+                  <div className="text-cyan-300 text-[11px]">Walk-ins are welcomed for immediate shelter avoidance.</div>
+                </div>
+              </div>
+
+              {/* Card 3: Free NYC Right-to-Counsel Legal Aid */}
+              <div className="p-5 rounded-xl bg-slate-950 border border-red-900/60 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-black text-purple-400">03 · FREE LAWYERS</span>
+                  <span className="text-[10px] font-mono text-purple-300 font-bold">Universal Access</span>
+                </div>
+                <h4 className="text-sm font-bold text-white">NYC Free Tenant Attorneys</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Under NYC's Universal Access to Counsel law, low-income tenants facing eviction are entitled to 100% free legal representation in Housing Court.
+                </p>
+                <div className="p-3 rounded-lg bg-slate-900 text-xs font-mono text-slate-300 space-y-1.5 border border-slate-800">
+                  <div>• Legal Aid Society: <strong>888-663-6880</strong></div>
+                  <div>• Legal Services NYC: <strong>917-661-4500</strong></div>
+                  <div>• Eviction Defense Hotline: Call 311 → "Tenant Helpline"</div>
+                  <div className="text-purple-300 text-[11px]">They will file an Order to Show Cause (OSC) on your behalf.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* PART 2: THE 72-HOUR LOW-EFFORT CUSTOMER ACQUISITION PLAYBOOK */}
+          <div className="p-6 md:p-8 rounded-2xl bg-slate-900 border-2 border-emerald-500/70 shadow-xl space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4 flex-wrap gap-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/60 flex items-center justify-center text-xl">
+                  💰
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-white flex items-center gap-2">
+                    <span>Part 2: The "Zero Cold Calling" Fast Subscriber Playbook</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700">
+                      Immediate Cash
+                    </span>
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    You don't need to be a salesperson. You just need to show up where companies are in severe pain right now.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* 3 High-Conversion, Low-Effort Channels */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Channel 1: The Questionnaire Rescue */}
+              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
+                    METHOD 01 · FASTEST CASH
+                  </span>
+                  <span className="text-xs font-mono text-emerald-400 font-bold">$299 - $999/mo</span>
+                </div>
+                <h4 className="text-base font-bold text-white">The "Stalled Deal" Security Questionnaire Rescue</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Startups with 2–50 employees frequently have $50k+ customer deals stalled because enterprise procurement sent them a 150-question Vendor Security Assessment (SOC 2, ISO, HIPAA). <strong>They will gladly pay $299 on the spot to save their deal.</strong>
+                </p>
+
+                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-1">
+                  <div className="font-bold text-cyan-300">Where to find them in 15 minutes:</div>
+                  <div>1. Go to LinkedIn, search: <code>Founder "security questionnaire"</code> or <code>CTO "SOC 2"</code></div>
+                  <div>2. Search on Twitter/X: <code>"security questionnaire" stalled</code> or <code>"vendor assessment"</code></div>
+                  <div>3. Check Y Combinator startup directory or Techstars alumni</div>
+                </div>
+
+                <div className="space-y-2 pt-2 border-t border-slate-800">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-300">Copy-Paste Message Script:</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleCopyText(
+`Hi [Founder Name], saw you're building [Company]. If you have enterprise customers stalling deals with 100-question vendor security questionnaires or demanding SOC 2 / HIPAA proof, I built 1-Compliance OS (www.1-compliance.com).
+
+We automate evidence collection, generate 12 master policies, and give you an auditor-ready binder in 24 hours for $299/mo instead of paying Vanta $20,000.
+
+Can I send you a 5-minute video walkthrough so you can unblock that deal today?`,
+                          'script_founder'
+                        )
+                      }
+                      className="text-cyan-400 hover:text-cyan-300 font-mono text-[11px] underline cursor-pointer"
+                    >
+                      {copiedSnippet === 'script_founder' ? '✓ Copied Script!' : '📋 Copy Script'}
+                    </button>
+                  </div>
+                  <pre className="p-3 rounded-lg bg-slate-900 text-[11px] font-mono text-cyan-200 overflow-x-auto leading-relaxed border border-slate-800">
+{`"Hi [Name], if enterprise customers are stalling deals with security questionnaires, I built 1-Compliance OS (www.1-compliance.com). We automate evidence and policies in 24 hours for $299/mo instead of Vanta's $20k. Can I send a 5-min walkthrough?"`}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Channel 2: CPA Firm Referral Partnership */}
+              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-indigo-950 text-indigo-300 border border-indigo-800">
+                    METHOD 02 · ZERO COLD CALLS
+                  </span>
+                  <span className="text-xs font-mono text-purple-400 font-bold">Recurring Stream</span>
+                </div>
+                <h4 className="text-base font-bold text-white">Local NYC CPA & Audit Firm Partnerships</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  CPA audit firms (Schellman, BDO, Withum, Marcum, CohnReznick, local boutique CPAs) <strong>DO NOT build software</strong>. They only do the audit. They hate when clients show up with messy Google Drives.
+                </p>
+
+                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-1">
+                  <div className="font-bold text-indigo-300">Why auditors love you:</div>
+                  <div>1. 1-Compliance OS produces <strong>clean, 1-click auditor ZIP binders</strong></div>
+                  <div>2. You offer to list them as a featured auditor in the app</div>
+                  <div>3. In exchange, they tell unorganized clients: <em>"Sign up for 1-Compliance OS first."</em></div>
+                </div>
+
+                <div className="space-y-2 pt-2 border-t border-slate-800">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-300">CPA Partner Pitch:</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleCopyText(
+`Hi [Audit Partner Name], I run 1-Compliance OS (www.1-compliance.com), an autonomous compliance platform based in NYC. Our software compiles continuous evidence into a 1-click tamper-proof AICPA/ISO binder for auditors.
+
+When our subscribers are ready for their final SOC 2 Type II or ISO 27001 audit, we refer them to verified CPA firms. We would love to feature your firm as an approved audit partner.
+
+In exchange, when clients come to you with disorganized evidence or can't afford Vanta's $25k fee, can you refer them to 1-Compliance OS ($149 - $999/mo) so they arrive with clean, organized binders?`,
+                          'script_cpa'
+                        )
+                      }
+                      className="text-indigo-400 hover:text-indigo-300 font-mono text-[11px] underline cursor-pointer"
+                    >
+                      {copiedSnippet === 'script_cpa' ? '✓ Copied Script!' : '📋 Copy CPA Pitch'}
+                    </button>
+                  </div>
+                  <pre className="p-3 rounded-lg bg-slate-900 text-[11px] font-mono text-indigo-200 overflow-x-auto leading-relaxed border border-slate-800">
+{`"Hi [Auditor], we run 1-Compliance OS. Our subscribers export clean 1-click AICPA binders. Can we refer our audit-ready subscribers to your firm, and have you send unorganized clients to our software?"`}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Channel 3: Verified Vendor Passport ($49/mo) */}
+              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                    METHOD 03 · VOLUME SALES
+                  </span>
+                  <span className="text-xs font-mono text-emerald-400 font-bold">$49/mo / Vendor</span>
+                </div>
+                <h4 className="text-base font-bold text-white">Sell Verified Vendor Passports to Suppliers</h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Every small SaaS tool, freelancer, IT contractor, and marketing agency is tired of filling out repetitive 100-question security spreadsheets for every client.
+                </p>
+
+                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-1">
+                  <div className="font-bold text-emerald-300">The Offer:</div>
+                  <div>• Fill out credentials once in 1-Compliance OS</div>
+                  <div>• Receive a <strong>Digital Verified Security Trust Badge</strong></div>
+                  <div>• Share one verified link with all enterprise clients for $49/mo</div>
+                </div>
+
+                <div className="space-y-2 pt-2 border-t border-slate-800">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-300">Vendor Outreach Pitch:</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleCopyText(
+`Hey [Agency / Vendor Name], tired of filling out 100-question security spreadsheets every time a corporate client hires you?
+
+We just launched the 1-Compliance Verified Vendor Passport (www.1-compliance.com). You verify your security posture once, get a verified digital badge, and send one link to enterprise clients so you never fill out another security questionnaire.
+
+It's just $49/mo. Grab your verified passport here: www.1-compliance.com`,
+                          'script_vendor'
+                        )
+                      }
+                      className="text-emerald-400 hover:text-emerald-300 font-mono text-[11px] underline cursor-pointer"
+                    >
+                      {copiedSnippet === 'script_vendor' ? '✓ Copied Script!' : '📋 Copy Vendor Pitch'}
+                    </button>
+                  </div>
+                  <pre className="p-3 rounded-lg bg-slate-900 text-[11px] font-mono text-emerald-200 overflow-x-auto leading-relaxed border border-slate-800">
+{`"Tired of 100-question security spreadsheets? Get the 1-Compliance Verified Vendor Passport. Fill out once, get a verified trust link for all corporate clients for $49/mo."`}
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            {/* Practical Daily 1-Hour Schedule for Immediate Revenue */}
+            <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+              <h4 className="text-sm font-black text-white flex items-center gap-2">
+                <span>🗓️</span>
+                <span>Your Realistic 72-Hour Survival Schedule (No Burnout, Maximum Impact)</span>
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300">
+                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+                  <div className="font-bold text-amber-400 font-mono">DAY 1: STABILIZE HOME</div>
+                  <p>1. Open ACCESS HRA (nyc.gov/accesshra) and submit the One Shot Deal rent application.</p>
+                  <p>2. Call Legal Aid Society (888-663-6880) to get an emergency housing lawyer assigned to freeze eviction.</p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+                  <div className="font-bold text-cyan-400 font-mono">DAY 2: SEND 20 MESSAGES</div>
+                  <p>1. Go to LinkedIn or Y-Combinator directory.</p>
+                  <p>2. Send 20 copy-pasted messages to founders with the "Security Questionnaire Rescue" script.</p>
+                  <p>3. Just 1 conversion = $299 to $999 in your Square account.</p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+                  <div className="font-bold text-emerald-400 font-mono">DAY 3: CALL 5 NYC CPAs</div>
+                  <p>1. Google "SOC 2 CPA firm NYC" or "ISO 27001 auditor Manhattan".</p>
+                  <p>2. Send the CPA partnership script to 5 audit managers.</p>
+                  <p>3. Secure your first audit referral stream.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -1225,7 +1551,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                 <span>Zero Individual User Fees (Single Corporate Billing)</span>
               </div>
               <span>·</span>
-              <span>Domain Whitelist Auto-Approval (`@acmecorp.com`)</span>
+              <span>Domain Whitelist Auto-Approval (`@1-compliance.com`)</span>
               <span>·</span>
               <span>Centralized Audit Chain of Custody</span>
             </div>
@@ -1317,14 +1643,14 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
               <div>
                 <div className="text-[11px] font-mono text-slate-400 uppercase">Subscribed Organization</div>
                 <div className="text-base font-bold text-white mt-1">
-                  {customBrand.companyName || 'Acme Corporation'}
+                  {customBrand.companyName || '1-Compliance'}
                 </div>
                 <div className="text-xs text-cyan-400 font-mono mt-0.5">Tax ID: 84-2910481</div>
               </div>
 
               <div>
                 <div className="text-[11px] font-mono text-slate-400 uppercase">Billing Contact</div>
-                <div className="text-base font-bold text-white mt-1">billing@acmecorp.com</div>
+                <div className="text-base font-bold text-white mt-1">billing@1-compliance.com</div>
                 <div className="text-xs text-emerald-400 font-mono mt-0.5">Master Square Subscription Active</div>
               </div>
 
@@ -1344,9 +1670,9 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                   onClick={() => {
                     // Bulk import demo: Add 3 simulated employees to the roster
                     const bulkNew: EnterpriseMember[] = [
-                      { id: `usr-${Date.now()}-1`, name: 'Elena Rostova', email: 'elena.r@acmecorp.com', department: 'Factory & Operations', role: 'Department Manager', status: 'Active', lastActive: 'Just now' },
-                      { id: `usr-${Date.now()}-2`, name: 'Liam O\'Connor', email: 'liam.o@acmecorp.com', department: 'IT & DevOps', role: 'Staff / Operator', status: 'Active', lastActive: 'Just now' },
-                      { id: `usr-${Date.now()}-3`, name: 'Priya Sharma', email: 'priya.s@acmecorp.com', department: 'HR & People', role: 'Compliance Officer', status: 'Active', lastActive: 'Just now' },
+                      { id: `usr-${Date.now()}-1`, name: 'Elena Rostova', email: 'elena.r@1-compliance.com', department: 'Factory & Operations', role: 'Department Manager', status: 'Active', lastActive: 'Just now' },
+                      { id: `usr-${Date.now()}-2`, name: 'Liam O\'Connor', email: 'liam.o@1-compliance.com', department: 'IT & DevOps', role: 'Staff / Operator', status: 'Active', lastActive: 'Just now' },
+                      { id: `usr-${Date.now()}-3`, name: 'Priya Sharma', email: 'priya.s@1-compliance.com', department: 'HR & People', role: 'Compliance Officer', status: 'Active', lastActive: 'Just now' },
                     ];
                     setMembers([...bulkNew, ...members]);
                     alert('✓ Demo Bulk Import: Added 3 new verified employees to the company pool!');
@@ -1382,7 +1708,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                   ))}
                   <button
                     onClick={() => {
-                      const newDom = prompt('Enter additional corporate email domain (e.g. acme-factory.com):');
+                      const newDom = prompt('Enter additional corporate email domain (e.g. yourcompany.com):');
                       if (newDom && newDom.trim()) {
                         const updated = {
                           ...customBrand,
@@ -1405,7 +1731,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                   <span className="text-xs font-bold text-white">Corporate Employee Invite Link</span>
                   <button
                     onClick={() =>
-                      handleCopyText('https://app.1-compliance.com/join/acme-corp-org-9821', 'invite_link')
+                      handleCopyText('https://app.1-compliance.com/join/corp-org-9821', 'invite_link')
                     }
                     className="text-xs font-mono text-cyan-400 hover:text-cyan-300 underline cursor-pointer"
                   >
@@ -1416,7 +1742,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                   Share this secure corporate link in your company Slack or intranet. Employees click once to join the approved pool:
                 </p>
                 <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-300 truncate">
-                  https://app.1-compliance.com/join/acme-corp-org-9821
+                  https://app.1-compliance.com/join/corp-org-9821
                 </div>
               </div>
             </div>
@@ -1598,7 +1924,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                     onChange={(e) =>
                       setCustomBrand({ ...customBrand, companyName: e.target.value })
                     }
-                    placeholder="e.g. Acme Corporation"
+                    placeholder="e.g. 1-Compliance or Your Organization Name"
                     className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
@@ -1613,7 +1939,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                     onChange={(e) =>
                       setCustomBrand({ ...customBrand, portalSubtitle: e.target.value })
                     }
-                    placeholder="e.g. Acme Internal Compliance Operating System"
+                    placeholder="e.g. Enterprise Compliance Operating System"
                     className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
@@ -1628,7 +1954,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                     onChange={(e) =>
                       setCustomBrand({ ...customBrand, welcomeMessage: e.target.value })
                     }
-                    placeholder="e.g. Welcome to Acme's Internal Compliance Portal"
+                    placeholder="e.g. Welcome to 1-Compliance Operating System"
                     className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
@@ -1643,7 +1969,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                     onChange={(e) =>
                       setCustomBrand({ ...customBrand, corporateDomain: e.target.value })
                     }
-                    placeholder="e.g. compliance.acmecorp.com"
+                    placeholder="e.g. app.1-compliance.com"
                     className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-700 text-white font-mono focus:outline-none focus:border-cyan-400"
                   />
                 </div>
@@ -2015,7 +2341,7 @@ const { result: subRes } = await square.subscriptionsApi.createSubscription({
                     required
                     value={newMemberEmail}
                     onChange={(e) => setNewMemberEmail(e.target.value)}
-                    placeholder="e.g. alex@acmecorp.com"
+                    placeholder="e.g. alex@yourcompany.com"
                     className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
@@ -3318,7 +3644,7 @@ volumes:
                       <div className="p-4 rounded-xl bg-slate-950 border border-emerald-900/60 space-y-2.5">
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-slate-400">Company Name:</span>
-                          <span className="font-bold text-white font-mono">{customBrand.companyName || 'Acme Corporation'}</span>
+                          <span className="font-bold text-white font-mono">{customBrand.companyName || '1-Compliance'}</span>
                         </div>
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-slate-400">Approved Headcount:</span>

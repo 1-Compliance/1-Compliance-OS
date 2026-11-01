@@ -26,9 +26,6 @@ export const SENTINELS: Sentinel[] = [
     ],
     greeting: "Hey there! I'm Jax, your Chief Mascot and Lead Sentinel. I'm here to ensure your entire company stays continuously audit-ready and to help you manage your enterprise compliance, multi-user seats, and third-party vendor vetting. How can I help you today?",
     mappedViews: ['dashboard', 'frameworks', 'subscriptions'],
-    accent: 'american',
-    accentLabel: 'American Accent (Heroic Lead)',
-    accentFlag: '🇺🇸',
   },
   {
     id: 'it',
@@ -54,9 +51,6 @@ export const SENTINELS: Sentinel[] = [
     ],
     greeting: "IT Sentinel online! I'm tracking your compute nodes, laptop fleet, and CI/CD security gates. Let's harden your infrastructure and ensure 100% control compliance.",
     mappedViews: ['blueprint'],
-    accent: 'american',
-    accentLabel: 'American Accent (Tech & Cyber)',
-    accentFlag: '🇺🇸',
   },
   {
     id: 'privacy',
@@ -82,9 +76,6 @@ export const SENTINELS: Sentinel[] = [
     ],
     greeting: "Privacy Sentinel on watch! I protect your data flows, encrypt your endpoints, and audit your website headers for bulletproof GDPR, HIPAA, and transport security.",
     mappedViews: ['scanner'],
-    accent: 'british',
-    accentLabel: 'British Accent (Regulatory Guardian)',
-    accentFlag: '🇬🇧',
   },
   {
     id: 'risky',
@@ -110,9 +101,6 @@ export const SENTINELS: Sentinel[] = [
     ],
     greeting: "Risky Sentinel reporting. Threats don't sleep, and neither do I. I keep your risk exposure calculated, incident playbooks armed, and digital forensics tamper-proof.",
     mappedViews: ['vendors'],
-    accent: 'british',
-    accentLabel: 'British Accent (Threat Intelligence)',
-    accentFlag: '🇬🇧',
   },
   {
     id: 'hr',
@@ -138,8 +126,5 @@ export const SENTINELS: Sentinel[] = [
     ],
     greeting: "HR Sentinel at your service! People are your strongest security perimeter. I ensure your access reviews are logged, policies are signed, and training is 100% verified.",
     mappedViews: ['policies', 'enterprise'],
-    accent: 'american',
-    accentLabel: 'American Accent (Empathetic Coach)',
-    accentFlag: '🇺🇸',
   },
 ];

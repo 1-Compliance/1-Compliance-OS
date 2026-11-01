@@ -70,8 +70,8 @@ export const FloatingSentinelCompanion: React.FC<FloatingSentinelCompanionProps>
     setShowSentinelPicker(false);
     const chosen = SENTINELS.find((s) => s.id === id);
     if (chosen) {
-      setBubbleText(`Switched to ${chosen.name} (${chosen.accent === 'british' ? '🇬🇧 British' : '🇺🇸 American'} Accent)`);
-      speakSentinel(id, `Greetings! ${chosen.name} standing guard in ${chosen.accent === 'british' ? 'British' : 'American'} accent.`);
+      setBubbleText(`Switched to ${chosen.name} · Sentinel operational.`);
+      speakSentinel(id, `Greetings! ${chosen.name} standing guard.`);
     }
   };
 
@@ -91,9 +91,6 @@ export const FloatingSentinelCompanion: React.FC<FloatingSentinelCompanionProps>
             referrerPolicy="no-referrer"
           />
           <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-white animate-pulse" />
-          <span className="absolute -bottom-1 -left-1 px-1 rounded bg-slate-950 text-[9px] font-mono font-black text-cyan-300">
-            {voiceProfile.accentFlag}
-          </span>
         </button>
       </div>
     );
@@ -113,7 +110,7 @@ export const FloatingSentinelCompanion: React.FC<FloatingSentinelCompanionProps>
                   ? 'bg-indigo-600 text-white border-indigo-700 scale-105 shadow-sm'
                   : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-indigo-50'
               }`}
-              title={`${s.name} (${s.accent === 'british' ? '🇬🇧 British' : '🇺🇸 American'})`}
+              title={s.name}
             >
               <img src={s.image} alt={s.name} className="h-7 object-contain" referrerPolicy="no-referrer" />
               <span className="text-[9px] font-black font-mono leading-none">{s.badge}</span>
@@ -129,7 +126,7 @@ export const FloatingSentinelCompanion: React.FC<FloatingSentinelCompanionProps>
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
             <span className="text-xs font-black text-indigo-900 tracking-tight">{activeSentinel.name}</span>
             <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700">
-              {voiceProfile.accentFlag} {voiceProfile.accent === 'british' ? 'British' : 'American'}
+              Active Unit
             </span>
           </div>
 
@@ -166,7 +163,7 @@ export const FloatingSentinelCompanion: React.FC<FloatingSentinelCompanionProps>
               isSpeaking ? 'text-purple-600 animate-pulse' : 'text-indigo-600 hover:text-indigo-800'
             }`}
           >
-            <span>{isSpeaking ? '⏹ Stop Voice' : `🔊 Speak (${voiceProfile.accentFlag})`}</span>
+            <span>{isSpeaking ? '⏹ Stop Audio' : '🔊 Play Audio Briefing'}</span>
           </button>
 
           <button

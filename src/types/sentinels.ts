@@ -13,9 +13,6 @@ export interface Sentinel {
   suggestedQuestions: string[];
   greeting: string;
   mappedViews: string[];
-  accent?: 'american' | 'british';
-  accentLabel?: string;
-  accentFlag?: string;
 }
 
 export interface SentinelMessage {

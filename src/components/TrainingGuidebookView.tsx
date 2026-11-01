@@ -136,24 +136,24 @@ const CHAPTERS: Chapter[] = [
     badge: 'AI Sentinels',
     readTime: '5 min read',
     summary:
-      'Operate Jax (Chief Sentinel) and the specialized category sentinels using live audio briefings, distinct accents, and voice commands.',
+      'Operate Jax (Chief Sentinel) and the specialized category sentinels using live audio briefings, compliance guidance, and automated voice controls.',
     sections: [
       {
         heading: '3.1 The 5 Sentinel Personas & Roles',
         content:
-          'Each sentinel guards a dedicated compliance domain with distinct specialized knowledge and speech personalities:',
+          'Each sentinel guards a dedicated compliance domain with specialized regulatory knowledge and operational focus:',
         bullets: [
-          'Jax (Lead Sentinel, #1): American Accent (Heroic Lead). Orchestrates overall company compliance, executive summaries, multi-user seats, and auditor handoffs.',
-          'IT Sentinel: American Accent (Tech & Infrastructure). Fleet laptop encryption (FileVault/BitLocker), cloud security posture (CSPM), CI/CD container scans.',
-          'Privacy Sentinel: British Accent (Authoritative & Legal). GDPR, HIPAA, Website Security Scanner, cookie consent, TLS 1.3 & data encryption in transit.',
-          'Risky Sentinel: American Accent (Proactive & Vigilant). Third-party vendor risk scoring, supply chain vetting, and SOC 2 CC9.2 vendor diligence.',
-          'HR Sentinel: British Accent (Diplomatic & Refined). Employee background checks, annual policy sign-offs, and training quest completion.',
+          'Jax (Lead Sentinel, #1): Orchestrates overall company compliance, executive summaries, multi-user seats, and auditor handoffs.',
+          'IT Sentinel: Fleet laptop encryption (FileVault/BitLocker), cloud security posture (CSPM), CI/CD container scans.',
+          'Privacy Sentinel: GDPR, HIPAA, Website Security Scanner, cookie consent, TLS 1.3 & data encryption in transit.',
+          'Risky Sentinel: Third-party vendor risk scoring, supply chain vetting, and SOC 2 CC9.2 vendor diligence.',
+          'HR Sentinel: Employee background checks, annual policy sign-offs, and training quest completion.',
         ],
         callout: {
           type: 'info',
-          title: 'Voice Accents & Browser Audio',
+          title: 'Audio Briefings & Browser Speech',
           message:
-            'You can click "⚙️ Voices" on any sentinel stage to select system voices and test custom speech rates or accents directly in your browser.',
+            'You can click the audio button on any sentinel stage to hear real-time compliance briefings and control playback directly in your browser.',
         },
       },
       {
