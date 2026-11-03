@@ -1,7 +1,0 @@
-{
-  "name": "1-Compliance OS — Autonomous Zero-Cost Compliance Operating System",
-  "description": "Autonomous compliance operating system for SOC 2, ISO 27001, HIPAA, GDPR, PCI-DSS, NIST CSF & EU AI Act with zero-dollar tooling, continuous evidence monitoring, policy engine, and auditor exports.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
-
